@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.session import Session
-from typing import Any
 from user import Base, User
 
 
@@ -12,7 +11,6 @@ class DB:
     """DB class"""
     def __init__(self) -> None:
         """Initialize a new DB instance"""
-        # self._engine = create_engine('sqlite:///a.db', echo=True)
         self._engine = create_engine('sqlite:///a.db')
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
@@ -33,20 +31,20 @@ class DB:
         self._session.commit()
         return new_user
 
-    # def find_user_by(self, **attributes: dict) -> list:
-    def find_user_by(self, **attributes: Any) -> User:
+    def find_user_by(self, **attributes) -> User:
         """Searches for a user in the database using the given attribute(s)"""
         result = self._session.query(User).filter_by(**attributes).all()
         if not result:
             raise NoResultFound
         return result[0]
 
-    def update_user(self, user_id: int, **attributes: dict) -> None:
+    def update_user(self, user_id: int, **attributes) -> None:
         """Updates a user in the database using the given id"""
+        if not isinstance(user_id, int) or not attributes:
+            return
         # Search for user with user_id in database
         user = self.find_user_by(id=user_id)
         if not user:
-            print(f'Error! User with id={user_id} not found')
             return
 
         # Validate given attributes before updating user
@@ -69,7 +67,7 @@ if __name__ == '__main__':
     user_1 = my_db.add_user('test@test.com', 'SuperHashedPwd')
     user_2 = my_db.add_user('test1@test.com', 'SuperHashedPwd1')
 
-    def test_exceptions(**kwargs: Any) -> None:
+    def test_exceptions(**kwargs) -> None:
         from sqlalchemy.exc import InvalidRequestError
         try:
             print(my_db.find_user_by(**kwargs))

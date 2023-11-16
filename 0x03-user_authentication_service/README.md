@@ -2,7 +2,7 @@
 
 This folder contains my submissions for the tasks in the project named ___[0x03.USER AUTHENTICATION SERVICE](https://intranet.alxswe.com/projects/1242)___. The project was a third and final introduction to authentication and showed how to manually implement a user authentication service with SQLAlchemy for database abstraction and a simple Flask API for the interface. This was simply for academic purposes though, as a user authentication service should never be implemented manually in a real project.
 
-## Table of contents
+## Table of Contents
 1. [Technologies Used](#Technologies-Used)
 2. [Files](#Files)
 3. [Setup](#Setup)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """User class model/template for user authentication service"""
-from sqlalchemy import Column, Integer, Sequence, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -10,11 +10,11 @@ class User(Base):
     """SQLAlchemy model for database table `users`"""
     __tablename__ = 'users'
 
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
-    email = Column(String(length=250), nullable=False)
-    hashed_password = Column(String(length=250), nullable=False)
-    session_id = Column(String(length=250))
-    reset_token = Column(String(length=250))
+    id = Column(Integer, primary_key=True)
+    email = Column(String(250), nullable=False)
+    hashed_password = Column(String(250), nullable=False)
+    session_id = Column(String(250))
+    reset_token = Column(String(250))
 
     def __repr__(self):
         """String representation of object"""

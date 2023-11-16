@@ -23,7 +23,6 @@ class Auth:
         """Initialises an instance of this class"""
         self._db = DB()
 
-    # def register_user(self, email: str, password: str) -> Union[User, None]:
     def register_user(self, email: str, password: str) -> User:
         """Adds a new user to the database"""
         # Input validation
@@ -76,7 +75,6 @@ class Auth:
         except NoResultFound:
             return None
 
-    # def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
     def get_user_from_session_id(self, session_id: str) -> User:
         """Searches for a user in the database for a given session_id"""
         # Input validation
@@ -133,8 +131,5 @@ class Auth:
                 user.id, reset_token=None, session_id=None,
                 hashed_password=_hash_password(password).decode('utf-8')
             )
-
-            # RESET session_id ADDED BUT NOT REQUESTED ABOVE. REMOVE IT?
-
         except NoResultFound:
             raise ValueError
